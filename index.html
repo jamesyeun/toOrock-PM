@@ -9,8 +9,8 @@
 <style>
 /* ══════════════════════════════════════
    ★ 여기에 본인의 Supabase 정보를 입력하세요
-   SUPABASE_URL = https://dlnluxtuelcmclgvqlcw.supabase.co
-   SUPABASE_KEY = sb_publishable_3_z202lUdeRrwak9vo1k3w_RrFZ9xey
+   SUPABASE_URL = https://[Reference ID].supabase.co
+   SUPABASE_KEY = Publishable key (default)
    ══════════════════════════════════════ */
 
 [data-theme="dark"] {
@@ -81,11 +81,13 @@ body {
 .header {
   background: var(--surface);
   border-bottom: 1px solid var(--border-sub);
-  padding: 0 28px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 56px;
+  min-height: 56px;
+  flex-wrap: wrap;
+  gap: 8px;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -104,9 +106,9 @@ body {
 .logo-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-muted); }
 .logo-ver { font-size: 10px; color: var(--text-dim); font-weight: 400; }
 
-.header-right { display: flex; align-items: center; gap: 16px; }
+.header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
-.header-stats { display: flex; gap: 16px; font-size: 12px; color: var(--text-muted); }
+.header-stats { display: flex; gap: 10px; font-size: 12px; color: var(--text-muted); }
 .stat-val { color: var(--text); font-weight: 500; font-family: 'DM Mono', monospace; }
 .stat-val.s-done { color: var(--success); }
 
@@ -379,6 +381,23 @@ body {
 .loading { grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 64px 0; font-size: 13px; font-family: 'DM Mono', monospace; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 .loading { animation: pulse 1.5s infinite; }
+
+/* ── 모바일 반응형 ── */
+@media (max-width: 600px) {
+  .main { padding: 16px 12px; }
+  .grid { grid-template-columns: 1fr; gap: 12px; }
+  .add-bar { padding: 10px 12px; }
+  .header-stats { display: none; }
+  .conn-badge span { display: none; }
+  .conn-badge { padding: 4px 8px; }
+  .logo { font-size: 13px; }
+  .add-task-r1 { flex-direction: column; }
+  .i-asn { width: 100%; }
+  .add-task-r2 { flex-wrap: wrap; }
+  .i-date { width: 100%; }
+  .i-pri { width: 100%; }
+  .btn-add-task { width: 100%; margin-left: 0; }
+}
 </style>
 </head>
 <body>
