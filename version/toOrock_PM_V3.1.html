@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>toOrock PM v3.1</title>
+<title>toOrock PM v3.2</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -11,14 +11,12 @@
   --bg: #111113;
   --surface: #18181b;
   --card: #1c1c20;
-  --card-hover: #222228;
   --border: #2e2e36;
   --border-sub: #252530;
   --text: #e4e4e8;
   --text-muted: #8888a0;
   --text-dim: #44444e;
   --accent-dim: rgba(212,212,216,0.08);
-  --accent-glow: rgba(212,212,216,0.15);
   --success: #a8e6c4;
   --success-bg: rgba(168,230,196,0.10);
   --warning: #f0c27a;
@@ -33,19 +31,16 @@
   --input-bg: #111113;
   --shadow: 0 8px 32px rgba(0,0,0,0.45);
 }
-
 [data-theme="light"] {
   --bg: #f4f4f5;
   --surface: #ffffff;
   --card: #ffffff;
-  --card-hover: #fafafa;
   --border: #d4d4d8;
   --border-sub: #e4e4e7;
   --text: #18181b;
   --text-muted: #71717a;
   --text-dim: #a1a1aa;
   --accent-dim: rgba(63,63,70,0.07);
-  --accent-glow: rgba(63,63,70,0.13);
   --success: #16a34a;
   --success-bg: rgba(22,163,74,0.08);
   --warning: #b45309;
@@ -62,14 +57,7 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'Noto Sans KR', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  transition: background .25s, color .25s;
-}
+body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; transition: background .25s, color .25s; }
 
 /* ── HEADER ── */
 .header {
@@ -87,238 +75,138 @@ body {
   z-index: 100;
   transition: background .25s;
 }
-
-.logo {
-  font-family: 'DM Mono', monospace;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+.logo { font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 8px; }
 .logo-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-muted); }
 .logo-ver { font-size: 10px; color: var(--text-dim); font-weight: 400; }
-
 .header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .header-stats { display: flex; gap: 10px; font-size: 12px; color: var(--text-muted); }
 .stat-val { color: var(--text); font-weight: 500; font-family: 'DM Mono', monospace; }
 .stat-val.s-done { color: var(--success); }
-
-.conn-badge {
-  font-size: 11px;
-  font-family: 'DM Mono', monospace;
-  padding: 3px 10px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  color: var(--text-dim);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
+.conn-badge { font-size: 11px; font-family: 'DM Mono', monospace; padding: 3px 10px; border-radius: 20px; border: 1px solid var(--border); color: var(--text-dim); display: flex; align-items: center; gap: 5px; }
 .conn-badge.connected { color: var(--success); border-color: var(--success-bg); background: var(--success-bg); }
 .conn-badge.error { color: var(--danger); border-color: var(--danger-bg); background: var(--danger-bg); }
 .conn-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-
-.theme-toggle {
-  display: flex;
-  background: var(--accent-dim);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 3px;
-  cursor: pointer;
-}
-.toggle-opt {
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 16px;
-  color: var(--text-muted);
-  font-family: 'DM Mono', monospace;
-  transition: .2s;
-  user-select: none;
-}
+.theme-toggle { display: flex; background: var(--accent-dim); border: 1px solid var(--border); border-radius: 20px; padding: 3px; cursor: pointer; }
+.toggle-opt { font-size: 11px; padding: 4px 10px; border-radius: 16px; color: var(--text-muted); font-family: 'DM Mono', monospace; transition: .2s; user-select: none; }
 .toggle-opt.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,.15); }
 
 /* ── SETUP BANNER ── */
-.setup-banner {
-  background: var(--warning-bg);
-  border: 1px solid var(--warning);
-  border-radius: 12px;
-  padding: 16px 20px;
-  margin-bottom: 20px;
-  font-size: 13px;
-  color: var(--warning);
-  line-height: 1.7;
-}
+.setup-banner { background: var(--warning-bg); border: 1px solid var(--warning); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; font-size: 13px; color: var(--warning); line-height: 1.7; }
 .setup-banner strong { font-weight: 700; display: block; margin-bottom: 4px; font-size: 14px; }
-.setup-banner code {
-  background: rgba(0,0,0,0.15);
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-}
+.setup-banner code { background: rgba(0,0,0,0.15); padding: 2px 6px; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 12px; }
 
 /* ── MAIN ── */
 .main { max-width: 1180px; margin: 0 auto; padding: 28px 20px; }
-
-.add-bar {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-  background: var(--surface);
-  border: 1px solid var(--border-sub);
-  border-radius: 14px;
-  padding: 12px 14px;
-  box-shadow: var(--shadow);
-  transition: background .25s;
-}
-.add-bar input {
-  flex: 1;
-  background: var(--input-bg);
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  padding: 9px 13px;
-  color: var(--text);
-  font-size: 14px;
-  font-family: 'Noto Sans KR', sans-serif;
-  outline: none;
-  transition: border-color .2s;
-}
+.add-bar { display: flex; gap: 8px; margin-bottom: 20px; background: var(--surface); border: 1px solid var(--border-sub); border-radius: 14px; padding: 12px 14px; box-shadow: var(--shadow); transition: background .25s; }
+.add-bar input { flex: 1; background: var(--input-bg); border: 1px solid var(--border); border-radius: 9px; padding: 9px 13px; color: var(--text); font-size: 14px; font-family: 'Noto Sans KR', sans-serif; outline: none; transition: border-color .2s; }
 .add-bar input:focus { border-color: var(--text-muted); }
 .add-bar input::placeholder { color: var(--text-dim); }
-
-.btn-create {
-  background: var(--text);
-  color: var(--bg);
-  border: none;
-  border-radius: 9px;
-  padding: 9px 18px;
-  font-size: 13px;
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 700;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: opacity .2s, transform .1s, background .25s, color .25s;
-}
+.btn-create { background: var(--text); color: var(--bg); border: none; border-radius: 9px; padding: 9px 18px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; font-weight: 700; cursor: pointer; white-space: nowrap; transition: opacity .2s, transform .1s, background .25s, color .25s; }
 .btn-create:hover { opacity: .8; }
 .btn-create:active { transform: scale(.97); }
 .btn-create:disabled { opacity: .4; cursor: not-allowed; }
-
 .filter-bar { display: flex; gap: 6px; margin-bottom: 22px; flex-wrap: wrap; align-items: center; }
 .filter-label { font-size: 11px; color: var(--text-dim); font-family: 'DM Mono', monospace; margin-right: 2px; }
-.filter-btn {
-  font-size: 12px;
-  font-family: 'Noto Sans KR', sans-serif;
-  padding: 5px 13px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: .18s;
-}
+.filter-btn { font-size: 12px; font-family: 'Noto Sans KR', sans-serif; padding: 5px 13px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); cursor: pointer; transition: .18s; }
 .filter-btn:hover { border-color: var(--text-muted); color: var(--text); }
 .filter-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); font-weight: 500; }
-
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 16px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 10px; }
 
 /* ── CARD ── */
 .card {
   background: var(--card);
   border: 1px solid var(--border-sub);
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
-  transition: border-color .2s, box-shadow .2s, background .25s;
+  transition: border-color .2s, background .25s;
   box-shadow: var(--shadow);
 }
 .card:hover { border-color: var(--border); }
-.card-top { padding: 18px 18px 0; }
-.card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; gap: 6px; }
-.card-title { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; line-height: 1.45; }
 
-/* ── 접기 버튼 ── */
+/* ── 카드 헤더 (항상 표시) ── */
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 14px;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.card-header:hover { background: rgba(255,255,255,0.02); }
+
 .btn-collapse {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 11px;
-  cursor: pointer;
-  padding: 2px 6px;
-  line-height: 1;
-  transition: transform .3s, color .15s;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  color: var(--text-muted);
+  font-size: 10px;
+  transition: transform .3s ease;
 }
-.btn-collapse:hover { color: var(--text); }
-.card.collapsed .btn-collapse { transform: rotate(-180deg); }
+/* 접힌 상태 → 삼각형 오른쪽(▶) */
+.card.collapsed .btn-collapse { transform: rotate(-90deg); }
+/* 펼친 상태 → 삼각형 아래(▼) 기본값 */
 
-/* ── 카드 바디 접기 애니메이션 ── */
-.card-body {
-  max-height: 2000px;
+.card-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  flex: 1;
+  line-height: 1.4;
+  white-space: nowrap;
   overflow: hidden;
-  transition: max-height .4s ease;
+  text-overflow: ellipsis;
 }
-.card.collapsed .card-body { max-height: 0; }
-.card.collapsed .card-top { padding-bottom: 18px; }
-.card.collapsed .prog-row,
-.card.collapsed .bar-bg { display: none; }
 
-.btn-del-card {
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--text-dim);
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-  transition: .15s;
-  flex-shrink: 0;
-}
-.btn-del-card:hover { border-color: var(--danger); color: var(--danger); background: var(--danger-bg); }
-
-.prog-row { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 5px; }
-.prog-pct { font-family: 'DM Mono', monospace; font-weight: 500; color: var(--text); }
-.prog-pct.all-done { color: var(--success); }
-
-.bar-bg { height: 3px; background: var(--bar-track); border-radius: 3px; overflow: hidden; margin-bottom: 14px; transition: background .25s; }
-.bar-fill { height: 100%; background: var(--text-muted); border-radius: 3px; transition: width .4s ease; }
-.bar-fill.done { background: var(--success); }
-
-.memo-wrap {
-  margin: 0 18px 12px;
-  background: var(--memo-bg);
-  border: 1px solid var(--border-sub);
-  border-radius: 9px;
-  padding: 8px 11px;
-  transition: background .25s;
-}
-.memo-label { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--text-dim); letter-spacing: .08em; margin-bottom: 3px; }
-.memo-wrap textarea {
-  width: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: var(--text-muted);
-  font-size: 12px;
-  font-family: 'Noto Sans KR', sans-serif;
-  resize: none;
-  line-height: 1.6;
-}
-.memo-wrap textarea::placeholder { color: var(--text-dim); }
-
-.task-section { padding: 0 18px; }
-
-/* ── TASK 일반 ── */
-.task-item {
+.card-meta {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 0;
-  border-bottom: 1px solid var(--border-sub);
-  font-size: 13px;
-  transition: border-color .25s;
+  flex-shrink: 0;
 }
+
+.prog-mini {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.prog-mini.done { color: var(--success); }
+
+.btn-del-card { background: transparent; border: 1px solid transparent; color: var(--text-dim); font-size: 11px; padding: 2px 7px; border-radius: 6px; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; transition: .15s; flex-shrink: 0; }
+.btn-del-card:hover { border-color: var(--danger); color: var(--danger); background: var(--danger-bg); }
+
+/* ── 카드 바디 (접기/펼치기) ── */
+.card-body {
+  overflow: hidden;
+  max-height: 2000px;
+  transition: max-height .35s ease;
+}
+.card.collapsed .card-body {
+  max-height: 0;
+}
+
+/* ── 진척도 ── */
+.prog-wrap { padding: 0 14px 10px; }
+.prog-row { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 5px; }
+.prog-pct { font-family: 'DM Mono', monospace; font-weight: 500; color: var(--text); }
+.prog-pct.all-done { color: var(--success); }
+.bar-bg { height: 3px; background: var(--bar-track); border-radius: 3px; overflow: hidden; transition: background .25s; }
+.bar-fill { height: 100%; background: var(--text-muted); border-radius: 3px; transition: width .4s ease; }
+.bar-fill.done { background: var(--success); }
+
+/* ── 메모 ── */
+.memo-wrap { margin: 0 14px 10px; background: var(--memo-bg); border: 1px solid var(--border-sub); border-radius: 9px; padding: 8px 11px; transition: background .25s; }
+.memo-label { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--text-dim); letter-spacing: .08em; margin-bottom: 3px; }
+.memo-wrap textarea { width: 100%; background: transparent; border: none; outline: none; color: var(--text-muted); font-size: 12px; font-family: 'Noto Sans KR', sans-serif; resize: none; line-height: 1.6; }
+.memo-wrap textarea::placeholder { color: var(--text-dim); }
+
+/* ── TASK ── */
+.task-section { padding: 0 14px; }
+.task-edit-hint { font-size: 10px; color: var(--text-dim); padding: 2px 0 4px; font-family: 'DM Mono', monospace; }
+.task-item { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--border-sub); font-size: 13px; transition: border-color .25s; }
 .task-item:last-child { border-bottom: none; }
 .task-item.completed .task-text { text-decoration: line-through; color: var(--text-dim); }
 .task-item input[type=checkbox] { width: 14px; height: 14px; cursor: pointer; accent-color: var(--text-muted); flex-shrink: 0; }
@@ -326,73 +214,22 @@ body {
 .task-text:hover { color: var(--text-muted); }
 .task-meta { display: flex; gap: 4px; align-items: center; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
 
-/* ── TASK 편집 모드 ── */
-.task-edit-wrap {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
+/* ── TASK 편집 ── */
+.task-edit-wrap { flex: 1; display: flex; flex-direction: column; gap: 5px; }
 .task-edit-row1 { display: flex; gap: 5px; }
 .task-edit-row2 { display: flex; gap: 5px; align-items: center; }
-
-.task-edit-wrap input,
-.task-edit-wrap select {
-  background: var(--input-bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--text);
-  font-size: 12px;
-  font-family: 'Noto Sans KR', sans-serif;
-  padding: 5px 8px;
-  outline: none;
-  transition: border-color .2s;
-}
-.task-edit-wrap input:focus,
-.task-edit-wrap select:focus { border-color: var(--text-muted); }
+.task-edit-wrap input, .task-edit-wrap select { background: var(--input-bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 12px; font-family: 'Noto Sans KR', sans-serif; padding: 5px 8px; outline: none; transition: border-color .2s; }
+.task-edit-wrap input:focus, .task-edit-wrap select:focus { border-color: var(--text-muted); }
 .task-edit-wrap input::placeholder { color: var(--text-dim); }
 .task-edit-wrap select option { background: var(--card); }
-
 .i-edit-text { flex: 1; }
 .i-edit-asn  { width: 72px; }
 .i-edit-date { width: 118px; font-size: 11px !important; }
 .i-edit-pri  { width: 70px; }
-
-.btn-edit-save {
-  background: var(--text);
-  color: var(--bg);
-  border: none;
-  border-radius: 6px;
-  padding: 5px 10px;
-  font-size: 11px;
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 700;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: opacity .2s;
-}
+.btn-edit-save { background: var(--text); color: var(--bg); border: none; border-radius: 6px; padding: 5px 10px; font-size: 11px; font-family: 'Noto Sans KR', sans-serif; font-weight: 700; cursor: pointer; white-space: nowrap; transition: opacity .2s; }
 .btn-edit-save:hover { opacity: .75; }
-
-.btn-edit-cancel {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  border-radius: 6px;
-  padding: 5px 8px;
-  font-size: 11px;
-  font-family: 'Noto Sans KR', sans-serif;
-  cursor: pointer;
-  transition: .15s;
-}
+.btn-edit-cancel { background: transparent; border: 1px solid var(--border); color: var(--text-muted); border-radius: 6px; padding: 5px 8px; font-size: 11px; font-family: 'Noto Sans KR', sans-serif; cursor: pointer; transition: .15s; }
 .btn-edit-cancel:hover { border-color: var(--text-muted); color: var(--text); }
-
-/* 편집 힌트 */
-.task-edit-hint {
-  font-size: 10px;
-  color: var(--text-dim);
-  padding: 4px 0 2px;
-  font-family: 'DM Mono', monospace;
-}
 
 .badge { font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 500; white-space: nowrap; font-family: 'DM Mono', monospace; }
 .b-high { background: var(--high-bg); color: var(--high-c); }
@@ -403,86 +240,39 @@ body {
 .b-over { background: var(--danger-bg);  color: var(--danger); }
 .b-asn  { background: var(--accent-dim); color: var(--text-muted); font-family: 'Noto Sans KR', sans-serif; font-size: 10px; }
 
-.btn-del-task {
-  background: transparent;
-  border: none;
-  color: var(--text-dim);
-  font-size: 14px;
-  line-height: 1;
-  cursor: pointer;
-  padding: 0 2px;
-  transition: color .15s;
-  flex-shrink: 0;
-}
+.btn-del-task { background: transparent; border: none; color: var(--text-dim); font-size: 14px; line-height: 1; cursor: pointer; padding: 0 2px; transition: color .15s; flex-shrink: 0; }
 .btn-del-task:hover { color: var(--danger); }
 
-.add-task-wrap {
-  background: var(--memo-bg);
-  border-top: 1px solid var(--border-sub);
-  padding: 12px 18px;
-  transition: background .25s;
-}
+/* ── ADD TASK ── */
+.add-task-wrap { background: var(--memo-bg); border-top: 1px solid var(--border-sub); padding: 10px 14px; transition: background .25s; }
 .add-task-r1, .add-task-r2 { display: flex; gap: 6px; margin-bottom: 6px; }
 .add-task-r2 { margin-bottom: 0; align-items: center; }
-
-.add-task-wrap input,
-.add-task-wrap select {
-  background: var(--input-bg);
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  color: var(--text);
-  font-size: 12px;
-  font-family: 'Noto Sans KR', sans-serif;
-  padding: 6px 10px;
-  outline: none;
-  transition: border-color .2s;
-}
+.add-task-wrap input, .add-task-wrap select { background: var(--input-bg); border: 1px solid var(--border); border-radius: 7px; color: var(--text); font-size: 12px; font-family: 'Noto Sans KR', sans-serif; padding: 6px 10px; outline: none; transition: border-color .2s; }
 .add-task-wrap input:focus, .add-task-wrap select:focus { border-color: var(--text-muted); }
 .add-task-wrap input::placeholder { color: var(--text-dim); }
 .add-task-wrap select option { background: var(--card); }
-
 .i-text { flex: 1; }
 .i-asn  { width: 80px; }
 .i-date { width: 130px; font-size: 11px !important; }
 .i-pri  { width: 78px; }
-
-.btn-add-task {
-  margin-left: auto;
-  background: var(--text);
-  color: var(--bg);
-  border: none;
-  border-radius: 7px;
-  padding: 6px 14px;
-  font-size: 12px;
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 700;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: opacity .2s, background .25s, color .25s;
-}
+.btn-add-task { margin-left: auto; background: var(--text); color: var(--bg); border: none; border-radius: 7px; padding: 6px 14px; font-size: 12px; font-family: 'Noto Sans KR', sans-serif; font-weight: 700; cursor: pointer; white-space: nowrap; transition: opacity .2s, background .25s, color .25s; }
 .btn-add-task:hover { opacity: .75; }
 .btn-add-task:disabled { opacity: .4; cursor: not-allowed; }
 
 .empty { grid-column: 1/-1; text-align: center; color: var(--text-dim); padding: 64px 0; font-size: 14px; }
 .no-tasks { font-size: 12px; color: var(--text-dim); padding: 10px 0 6px; font-style: italic; }
-
-.loading { grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 64px 0; font-size: 13px; font-family: 'DM Mono', monospace; }
+.loading { grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 64px 0; font-size: 13px; font-family: 'DM Mono', monospace; animation: pulse 1.5s infinite; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-.loading { animation: pulse 1.5s infinite; }
 
 @media (max-width: 600px) {
   .main { padding: 16px 12px; }
-  .grid { grid-template-columns: 1fr; gap: 12px; }
-  .add-bar { padding: 10px 12px; }
+  .grid { grid-template-columns: 1fr; gap: 8px; }
   .header-stats { display: none; }
   .conn-badge span { display: none; }
-  .conn-badge { padding: 4px 8px; }
-  .logo { font-size: 13px; }
   .add-task-r1 { flex-direction: column; }
   .i-asn { width: 100%; }
   .add-task-r2 { flex-wrap: wrap; }
-  .i-date { width: 100%; }
-  .i-pri { width: 100%; }
+  .i-date, .i-pri { width: 100%; }
   .btn-add-task { width: 100%; margin-left: 0; }
 }
 </style>
@@ -493,7 +283,7 @@ body {
   <div class="logo">
     <div class="logo-dot"></div>
     toOrock_PM
-    <span class="logo-ver">v3.1</span>
+    <span class="logo-ver">v3.2</span>
   </div>
   <div class="header-right">
     <div class="conn-badge" id="connBadge">
@@ -511,7 +301,7 @@ body {
 <div class="main">
   <div id="setupBanner" class="setup-banner" style="display:none">
     <strong>⚠️ Supabase 설정이 필요합니다</strong>
-    이 파일을 텍스트 편집기로 열어서 상단의 <code>SUPABASE_URL</code>과 <code>SUPABASE_KEY</code>를 본인의 값으로 교체해 주세요.
+    이 파일을 텍스트 편집기로 열어서 <code>SUPABASE_URL</code>과 <code>SUPABASE_KEY</code>를 입력해 주세요.
   </div>
 
   <div class="add-bar">
@@ -536,8 +326,8 @@ body {
 // ══════════════════════════════════════════════════════
 //  ★★★ 여기에 본인의 Supabase 정보를 입력하세요 ★★★
 // ══════════════════════════════════════════════════════
-const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-const SUPABASE_KEY = 'YOUR_SUPABASE_KEY';
+const SUPABASE_URL = 'https://dlnluxtuelcmclgvqlcw.supabase.co';   // 예: https://abcdefgh.supabase.co
+const SUPABASE_KEY = 'sb_publishable_3_z202lUdeRrwak9vo1k3w_RrFZ9xey';   // Publishable key (default)
 // ══════════════════════════════════════════════════════
 
 const { createClient } = supabase;
@@ -546,21 +336,17 @@ let projects = [];
 let taskFilter = 'all';
 let theme = localStorage.getItem('toOrock_theme') || 'dark';
 let isConnected = false;
-
-// 편집 중인 Task ID 추적
 let editingTaskId = null;
+let collapsedCards = new Set(); // 접힌 카드 ID 추적
 
-// ── 초기화 ──────────────────────────────────────────
 async function init() {
   applyTheme();
-
   if (SUPABASE_URL === 'YOUR_SUPABASE_URL' || SUPABASE_KEY === 'YOUR_SUPABASE_KEY') {
     document.getElementById('setupBanner').style.display = 'block';
     setConnState(false, '키 미설정');
-    document.getElementById('grid').innerHTML = '<div class="empty">상단 안내에 따라 Supabase 키를 설정해 주세요</div>';
+    document.getElementById('grid').innerHTML = '<div class="empty">Supabase 키를 설정해 주세요</div>';
     return;
   }
-
   try {
     sb = createClient(SUPABASE_URL, SUPABASE_KEY);
     await loadProjects();
@@ -568,46 +354,34 @@ async function init() {
     isConnected = true;
   } catch(e) {
     setConnState(false, '연결 실패');
-    document.getElementById('grid').innerHTML = '<div class="empty">Supabase 연결에 실패했습니다. URL과 키를 확인해 주세요.</div>';
+    document.getElementById('grid').innerHTML = '<div class="empty">Supabase 연결에 실패했습니다.</div>';
   }
 }
 
 function setConnState(ok, text) {
   const badge = document.getElementById('connBadge');
-  const span  = document.getElementById('connText');
   badge.className = 'conn-badge ' + (ok ? 'connected' : 'error');
-  span.textContent = text;
+  document.getElementById('connText').textContent = text;
 }
 
-// ── 데이터 로드 ──────────────────────────────────────
 async function loadProjects() {
   document.getElementById('grid').innerHTML = '<div class="loading">불러오는 중...</div>';
-
   const { data: pData, error: pErr } = await sb.from('projects').select('*').order('created_at', { ascending: false });
   if (pErr) throw pErr;
-
   const { data: tData, error: tErr } = await sb.from('tasks').select('*').order('created_at', { ascending: true });
   if (tErr) throw tErr;
-
-  projects = pData.map(p => ({
-    ...p,
-    tasks: tData.filter(t => t.project_id === p.id)
-  }));
-
+  projects = pData.map(p => ({ ...p, tasks: tData.filter(t => t.project_id === p.id) }));
   render();
 }
 
-// ── 프로젝트 ─────────────────────────────────────────
 async function addProject() {
   if (!isConnected) return;
   const el = document.getElementById('pInput');
   const title = el.value.trim();
   if (!title) return;
-
   document.getElementById('btnCreate').disabled = true;
   const { data, error } = await sb.from('projects').insert({ title, memo: '' }).select().single();
   document.getElementById('btnCreate').disabled = false;
-
   if (error) { alert('프로젝트 생성 실패: ' + error.message); return; }
   el.value = '';
   projects.unshift({ ...data, tasks: [] });
@@ -619,13 +393,21 @@ async function delProject(id) {
   const { error } = await sb.from('projects').delete().eq('id', id);
   if (error) { alert('삭제 실패: ' + error.message); return; }
   projects = projects.filter(p => p.id !== id);
+  collapsedCards.delete(id);
   render();
 }
 
 // ── 카드 접기/펼치기 ─────────────────────────────────
-function toggleCollapse(pId) {
+function toggleCollapse(pId, e) {
+  e.stopPropagation();
   const card = document.getElementById('card-' + pId);
-  card.classList.toggle('collapsed');
+  if (collapsedCards.has(pId)) {
+    collapsedCards.delete(pId);
+    card.classList.remove('collapsed');
+  } else {
+    collapsedCards.add(pId);
+    card.classList.add('collapsed');
+  }
 }
 
 let memoTimer = {};
@@ -638,7 +420,6 @@ async function updateMemo(id, val) {
   }, 800);
 }
 
-// ── Task ─────────────────────────────────────────────
 async function addTask(pId) {
   if (!isConnected) return;
   const txt = document.getElementById('ti-' + pId).value.trim();
@@ -646,17 +427,13 @@ async function addTask(pId) {
   const asn = document.getElementById('ta-' + pId).value.trim();
   const due = document.getElementById('td-' + pId).value || null;
   const pri = document.getElementById('tp-' + pId).value || '';
-
   const btn = document.querySelector(`#card-${pId} .btn-add-task`);
   if (btn) btn.disabled = true;
-
   const { data, error } = await sb.from('tasks').insert({
     project_id: pId, text: txt, assignee: asn, due, priority: pri, done: false
   }).select().single();
-
   if (btn) btn.disabled = false;
   if (error) { alert('Task 추가 실패: ' + error.message); return; }
-
   const p = projects.find(p => p.id === pId);
   p.tasks.push(data);
   document.getElementById('ti-' + pId).value = '';
@@ -682,11 +459,9 @@ async function delTask(pId, tId) {
   render();
 }
 
-// ── Task 편집 ─────────────────────────────────────────
 function startEditTask(tId) {
   editingTaskId = tId;
   render();
-  // 편집 인풋에 포커스
   setTimeout(() => {
     const input = document.getElementById('edit-text-' + tId);
     if (input) input.focus();
@@ -701,29 +476,18 @@ function cancelEditTask() {
 async function saveEditTask(pId, tId) {
   const txt = document.getElementById('edit-text-' + tId).value.trim();
   if (!txt) { alert('내용을 입력해 주세요'); return; }
-
   const asn = document.getElementById('edit-asn-' + tId).value.trim();
   const due = document.getElementById('edit-due-' + tId).value || null;
   const pri = document.getElementById('edit-pri-' + tId).value || '';
-
-  const { error } = await sb.from('tasks').update({
-    text: txt, assignee: asn, due, priority: pri
-  }).eq('id', tId);
-
+  const { error } = await sb.from('tasks').update({ text: txt, assignee: asn, due, priority: pri }).eq('id', tId);
   if (error) { alert('수정 실패: ' + error.message); return; }
-
   const p = projects.find(p => p.id === pId);
   const t = p.tasks.find(t => t.id === tId);
-  t.text = txt;
-  t.assignee = asn;
-  t.due = due;
-  t.priority = pri;
-
+  t.text = txt; t.assignee = asn; t.due = due; t.priority = pri;
   editingTaskId = null;
   render();
 }
 
-// ── 필터 / 유틸 ──────────────────────────────────────
 function setFilter(btn, f) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -752,7 +516,6 @@ function priBadge(p) {
   return `<span class="badge ${m[p][0]}">${m[p][1]}</span>`;
 }
 
-// ── 렌더 ─────────────────────────────────────────────
 function render() {
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
@@ -772,24 +535,23 @@ function render() {
 
   projects.forEach(p => {
     let tasks = [...p.tasks];
-    if (taskFilter === 'active')  tasks = tasks.filter(t => !t.done);
-    else if (taskFilter === 'done')   tasks = tasks.filter(t => t.done);
-    else if (taskFilter === 'urgent') tasks = tasks.filter(t => { const d = dday(t.due); return d !== null && d <= 3 && !t.done; });
+    if (taskFilter === 'active')       tasks = tasks.filter(t => !t.done);
+    else if (taskFilter === 'done')    tasks = tasks.filter(t => t.done);
+    else if (taskFilter === 'urgent')  tasks = tasks.filter(t => { const d = dday(t.due); return d !== null && d <= 3 && !t.done; });
 
     const tot = p.tasks.length;
     const dn  = p.tasks.filter(t => t.done).length;
     const pct = tot === 0 ? 0 : Math.round(dn / tot * 100);
     const allDone = pct === 100 && tot > 0;
+    const isCollapsed = collapsedCards.has(p.id);
 
     const rows = tasks.map(t => {
-      // 편집 모드
       if (editingTaskId === t.id) {
         const priOptions = ['', 'high', 'mid', 'low'];
         const priLabels  = ['우선순위', '높음', '중간', '낮음'];
         const priSel = priOptions.map((v, i) =>
           `<option value="${v}" ${t.priority === v ? 'selected' : ''}>${priLabels[i]}</option>`
         ).join('');
-
         return `
           <div class="task-item">
             <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggleTask('${p.id}','${t.id}',this.checked)">
@@ -799,7 +561,7 @@ function render() {
                 <input type="text" id="edit-asn-${t.id}"  class="i-edit-asn"  value="${t.assignee || ''}" placeholder="담당자">
               </div>
               <div class="task-edit-row2">
-                <input type="date" id="edit-due-${t.id}"  class="i-edit-date" value="${t.due || ''}">
+                <input type="date" id="edit-due-${t.id}" class="i-edit-date" value="${t.due || ''}">
                 <select id="edit-pri-${t.id}" class="i-edit-pri">${priSel}</select>
                 <button class="btn-edit-save" onclick="saveEditTask('${p.id}','${t.id}')">저장</button>
                 <button class="btn-edit-cancel" onclick="cancelEditTask()">취소</button>
@@ -808,8 +570,6 @@ function render() {
             <button class="btn-del-task" onclick="delTask('${p.id}','${t.id}')">×</button>
           </div>`;
       }
-
-      // 일반 모드 — 텍스트 클릭하면 편집 모드 진입
       return `
         <div class="task-item ${t.done ? 'completed' : ''}">
           <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggleTask('${p.id}','${t.id}',this.checked)">
@@ -824,28 +584,27 @@ function render() {
     }).join('');
 
     const card = document.createElement('div');
-    card.className = 'card';
+    card.className = 'card' + (isCollapsed ? ' collapsed' : '');
     card.id = `card-${p.id}`;
     card.innerHTML = `
-      <div class="card-top">
-        <div class="card-header">
-          <span class="card-title">${p.title}</span>
-          <button class="btn-collapse" onclick="toggleCollapse('${p.id}')" title="접기/펼치기">▼</button>
+      <div class="card-header">
+        <div class="btn-collapse" onclick="toggleCollapse('${p.id}', event)">▼</div>
+        <span class="card-title">${p.title}</span>
+        <div class="card-meta">
+          <span class="prog-mini ${allDone ? 'done' : ''}">${dn}/${tot} · ${pct}%</span>
           <button class="btn-del-card" onclick="delProject('${p.id}')">삭제</button>
         </div>
-        <div class="prog-row">
-          <span>${dn}/${tot} Tasks</span>
-          <span class="prog-pct ${allDone ? 'all-done' : ''}">${pct}%</span>
-        </div>
-        <div class="bar-bg"><div class="bar-fill ${allDone ? 'done' : ''}" style="width:${pct}%"></div></div>
       </div>
       <div class="card-body">
+        <div class="prog-wrap">
+          <div class="bar-bg"><div class="bar-fill ${allDone ? 'done' : ''}" style="width:${pct}%"></div></div>
+        </div>
         <div class="memo-wrap">
           <div class="memo-label">MEMO</div>
           <textarea rows="2" placeholder="메모 또는 코멘트..." oninput="updateMemo('${p.id}',this.value)">${p.memo || ''}</textarea>
         </div>
         <div class="task-section">
-          <div class="task-edit-hint">Task 텍스트를 클릭하면 편집할 수 있습니다</div>
+          <div class="task-edit-hint">Task 텍스트 클릭 → 편집</div>
           <div class="task-list">
             ${rows || '<div class="no-tasks">표시할 Task가 없습니다</div>'}
           </div>
@@ -853,7 +612,7 @@ function render() {
         <div class="add-task-wrap">
           <div class="add-task-r1">
             <input type="text" id="ti-${p.id}" class="i-text" placeholder="새 할 일 내용...">
-            <input type="text" id="ta-${p.id}" class="i-asn"  placeholder="담당자">
+            <input type="text" id="ta-${p.id}" class="i-asn" placeholder="담당자">
           </div>
           <div class="add-task-r2">
             <input type="date" id="td-${p.id}" class="i-date">
@@ -871,7 +630,6 @@ function render() {
   });
 }
 
-// ── 테마 ─────────────────────────────────────────────
 function applyTheme() {
   document.documentElement.setAttribute('data-theme', theme);
   document.getElementById('opt-dark').classList.toggle('active', theme === 'dark');
