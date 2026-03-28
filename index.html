@@ -241,28 +241,27 @@ body {
 .btn-collapse {
   background: transparent;
   border: none;
-  color: var(--text-dim);
-  font-size: 14px;
+  color: var(--text-muted);
+  font-size: 11px;
   cursor: pointer;
-  padding: 2px 4px;
+  padding: 2px 6px;
   line-height: 1;
   transition: transform .3s, color .15s;
   flex-shrink: 0;
 }
-.btn-collapse:hover { color: var(--text-muted); }
-.card.collapsed .btn-collapse { transform: rotate(-90deg); }
+.btn-collapse:hover { color: var(--text); }
+.card.collapsed .btn-collapse { transform: rotate(-180deg); }
 
 /* ── 카드 바디 접기 애니메이션 ── */
 .card-body {
   max-height: 2000px;
-  opacity: 1;
   overflow: hidden;
-  transition: max-height .4s ease, opacity .3s ease;
+  transition: max-height .4s ease;
 }
-.card.collapsed .card-body {
-  max-height: 0;
-  opacity: 0;
-}
+.card.collapsed .card-body { max-height: 0; }
+.card.collapsed .card-top { padding-bottom: 18px; }
+.card.collapsed .prog-row,
+.card.collapsed .bar-bg { display: none; }
 
 .btn-del-card {
   background: transparent;
@@ -831,7 +830,7 @@ function render() {
       <div class="card-top">
         <div class="card-header">
           <span class="card-title">${p.title}</span>
-          <button class="btn-collapse" onclick="toggleCollapse('${p.id}')" title="접기/펼치기">▾</button>
+          <button class="btn-collapse" onclick="toggleCollapse('${p.id}')" title="접기/펼치기">▼</button>
           <button class="btn-del-card" onclick="delProject('${p.id}')">삭제</button>
         </div>
         <div class="prog-row">
